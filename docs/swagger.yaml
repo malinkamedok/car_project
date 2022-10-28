@@ -1,0 +1,585 @@
+basePath: /
+definitions:
+  entity.Component:
+    properties:
+      additional_info:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      type_id:
+        type: integer
+      vendor_id:
+        type: integer
+    type: object
+  entity.Engineer:
+    properties:
+      experience:
+        type: integer
+      factory_id:
+        type: integer
+      gender:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      salary:
+        type: integer
+      vendor_id:
+        type: integer
+    type: object
+  entity.Factory:
+    properties:
+      id:
+        type: integer
+      max_workers:
+        type: integer
+      productivity:
+        type: integer
+      vendor_id:
+        type: integer
+    type: object
+  entity.Model:
+    properties:
+      engineer_id:
+        type: integer
+      factory_id:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: integer
+      prod_cost:
+        type: integer
+      sales:
+        type: integer
+      significance:
+        type: integer
+      vendor_id:
+        type: integer
+      wheeldrive:
+        type: string
+    type: object
+  entity.Order:
+    properties:
+      id:
+        type: integer
+      model_id:
+        type: integer
+      order_type:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  entity.Shipment:
+    properties:
+      cost:
+        type: integer
+      country_to_id:
+        type: integer
+      date:
+        type: string
+      id:
+        type: integer
+      order_id:
+        type: integer
+    type: object
+  entity.Subsidy:
+    properties:
+      country_id:
+        type: integer
+      id:
+        type: integer
+      require_price:
+        type: integer
+      required_wd:
+        type: string
+    type: object
+  entity.Type:
+    properties:
+      additional_info:
+        type: string
+      id:
+        type: integer
+      type:
+        type: string
+    type: object
+  internal_controller_http_v1.componentCreateRequest:
+    properties:
+      additional_info:
+        type: string
+      name:
+        type: string
+      type_id:
+        type: integer
+      vendor_id:
+        type: integer
+    type: object
+  internal_controller_http_v1.createAcceptSubsidyRequest:
+    properties:
+      component-bumper-id:
+        type: integer
+      component-door-id:
+        type: integer
+      component-engine-id:
+        type: integer
+      component-transmission-id:
+        type: integer
+      engineer-id:
+        type: integer
+      factory-id:
+        type: integer
+      name:
+        type: string
+      significance:
+        type: integer
+      subsidy-id:
+        type: integer
+      vendor-id:
+        type: integer
+    type: object
+  internal_controller_http_v1.createOrderRequest:
+    properties:
+      model_id:
+        type: integer
+      order_type:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  internal_controller_http_v1.createShipmentRequest:
+    properties:
+      country_id:
+        type: integer
+      date:
+        type: string
+      order_id:
+        type: integer
+    type: object
+  internal_controller_http_v1.createSubsidyRequest:
+    properties:
+      country-id-by:
+        type: integer
+      require-price-by:
+        type: number
+      required-wd-by:
+        type: string
+    type: object
+  internal_controller_http_v1.doDesignRequest:
+    properties:
+      engineer_id:
+        type: integer
+      factory_id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: integer
+      significance:
+        type: integer
+      vendor_id:
+        type: integer
+      wheeldrive:
+        type: string
+    type: object
+  internal_controller_http_v1.errResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  pahan_internal_controller_http_v1.componentCreateRequest:
+    properties:
+      additional_info:
+        type: string
+      name:
+        type: string
+      type_id:
+        type: integer
+      vendor_id:
+        type: integer
+    type: object
+  pahan_internal_controller_http_v1.createAcceptSubsidyRequest:
+    properties:
+      component-bumper-id:
+        type: integer
+      component-door-id:
+        type: integer
+      component-engine-id:
+        type: integer
+      component-transmission-id:
+        type: integer
+      engineer-id:
+        type: integer
+      factory-id:
+        type: integer
+      name:
+        type: string
+      significance:
+        type: integer
+      subsidy-id:
+        type: integer
+      vendor-id:
+        type: integer
+    type: object
+  pahan_internal_controller_http_v1.createOrderRequest:
+    properties:
+      model_id:
+        type: integer
+      order_type:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  pahan_internal_controller_http_v1.createShipmentRequest:
+    properties:
+      country_id:
+        type: integer
+      date:
+        type: string
+      order_id:
+        type: integer
+    type: object
+  pahan_internal_controller_http_v1.createSubsidyRequest:
+    properties:
+      country-id-by:
+        type: integer
+      require-price-by:
+        type: number
+      required-wd-by:
+        type: string
+    type: object
+  pahan_internal_controller_http_v1.doDesignRequest:
+    properties:
+      engineer_id:
+        type: integer
+      factory_id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: integer
+      significance:
+        type: integer
+      vendor_id:
+        type: integer
+      wheeldrive:
+        type: string
+    type: object
+  pahan_internal_controller_http_v1.errResponse:
+    properties:
+      error:
+        type: string
+    type: object
+host: localhost:9000
+info:
+  contact: {}
+  description: Курсовая работа по предмету "Информационные системы и базы данных"
+    студента группы P34312, Соловьева Павла
+  title: Автомобилестроение в экономике
+  version: "1.0"
+paths:
+  /v1/accept_subsidy:
+    post:
+      description: Accept and link subsidy
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.createAcceptSubsidyRequest'
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: accept subsidy
+      tags:
+      - Posts
+  /v1/create_component:
+    post:
+      description: Create component based on params
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.componentCreateRequest'
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: create component
+      tags:
+      - Posts
+  /v1/create_model:
+    post:
+      description: Create model based on params
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pahan_internal_controller_http_v1.doDesignRequest'
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/pahan_internal_controller_http_v1.errResponse'
+      summary: create model
+      tags:
+      - Posts
+  /v1/create_order:
+    post:
+      description: Create and link new order with
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.createOrderRequest'
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: create new order
+      tags:
+      - Posts
+  /v1/create_shipment:
+    post:
+      description: Create and link new shipment
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pahan_internal_controller_http_v1.createShipmentRequest'
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pahan_internal_controller_http_v1.errResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/pahan_internal_controller_http_v1.errResponse'
+      summary: create new shipment
+      tags:
+      - Posts
+  /v1/create_subsidy:
+    post:
+      description: Create and link subsidy with dependent values
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.createSubsidyRequest'
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: create subsidy
+      tags:
+      - Posts
+  /v1/get_components:
+    get:
+      description: Get all components
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Component'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: get components
+      tags:
+      - Gets
+  /v1/get_components_by_vendor_and_type:
+    get:
+      description: Get all components depend on vendorID and typeID
+      parameters:
+      - description: id of a vendor
+        in: query
+        name: vendor-id
+        required: true
+        type: string
+      - description: id of a type
+        in: query
+        name: type-id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Component'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: get component
+      tags:
+      - Gets
+  /v1/get_engineers_by_vendor:
+    get:
+      description: Get all engineers with current vendorID
+      parameters:
+      - description: id of a vendor
+        in: query
+        name: vendor-id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Engineer'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: list of engineers
+      tags:
+      - Gets
+  /v1/get_factories_by_vendor:
+    get:
+      description: Get all factories with current vendorID
+      parameters:
+      - description: id of a vendor
+        in: query
+        name: vendor-id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Factory'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: list of factories
+      tags:
+      - Gets
+  /v1/get_models:
+    get:
+      description: Get all models
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Model'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pahan_internal_controller_http_v1.errResponse'
+      summary: list of models
+      tags:
+      - Gets
+  /v1/get_orders:
+    get:
+      description: Get All orders info
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Order'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: get orders
+      tags:
+      - Gets
+  /v1/get_shipments:
+    get:
+      description: Get all shipments
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Shipment'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/pahan_internal_controller_http_v1.errResponse'
+      summary: get shipments
+      tags:
+      - Gets
+  /v1/get_subsidies:
+    get:
+      description: Get all subsidies
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Subsidy'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.errResponse'
+      summary: list of subsidies
+      tags:
+      - Gets
+  /v1/get_types:
+    get:
+      description: Get all types
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Type'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pahan_internal_controller_http_v1.errResponse'
+      summary: list of types
+      tags:
+      - Gets
+swagger: "2.0"
